@@ -1,0 +1,93 @@
+body {
+  position: relative;
+}
+
+body #tv .main-pic {
+  width: 100%;
+}
+
+body #tv #video img {
+  position: absolute;
+  top: 190px;
+  left: 225px;
+  z-index: -1;
+  width: 250px;
+}
+
+body #cha {
+  width: 26%;
+  height: 37%;
+  position: absolute;
+  top: 40%;
+  left: 31%;
+}
+
+body #cha #num {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: end;
+      -ms-flex-pack: end;
+          justify-content: flex-end;
+  padding-right: 12%;
+  padding-top: 5%;
+}
+
+@-webkit-keyframes dot {
+  0% {
+    opacity: 0;
+  }
+  7% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
+@keyframes dot {
+  0% {
+    opacity: 0;
+  }
+  7% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
+body #cha #num .num {
+  border: none;
+  background: none;
+  width: 12%;
+  height: 25%;
+  text-align: center;
+  font-family: 'Orbitron', sans-serif;
+  color: #1ee604;
+  font-weight: 700;
+  font-size: 3vw;
+}
+
+body #cha #video {
+  position: absolute;
+  top: 0;
+  height: 100%;
+  z-index: -2;
+}
+
+body #cha #video img {
+  height: 100%;
+}
+
+body #cha #default {
+  position: absolute;
+  top: 0;
+  height: 100%;
+  z-index: -3;
+}
+
+body #cha #default img {
+  height: 100%;
+}
+/*# sourceMappingURL=style.css.map */
