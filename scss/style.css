@@ -96,4 +96,14 @@ body #cha #default {
 body #cha #default img {
   height: 100%;
 }
+
+body #cha #default.bg {
+  background-color: #000;
+  width: 100%;
+  height: 100%;
+}
+
+body #cha #default.bg img {
+  display: none;
+}
 /*# sourceMappingURL=style.css.map */
