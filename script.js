@@ -1,59 +1,75 @@
 
 
 
+// !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+// !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+// 如果輸入 034 頻道，無法前往 34 頻道 
+// 點數字以外的會出現錯誤
+// !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+// !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+
+// 18, 19 ,27, 29, 36
+
+
+let video = document.getElementById('video');
+let hundNum = document.getElementById('hund-num');
+let tensNum = document.getElementById('tens-num');
+let unitsNum = document.getElementById('units-num');
+
+let arr = [];
+let cURL = ['' , ''];
 
 function clear () {
 
     arr = [];
-    document.getElementById('hund-num').value = "";
-    document.getElementById('tens-num').value = "";
-    document.getElementById('units-num').value = "";
+    hundNum.value = "";
+    tensNum.value = "";
+    unitsNum.value = "";
 }
 
 function turnChannel () {
-    
-    document.getElementById('video').innerHTML = 
-    `<img src="img/${arr[0]}${arr[1]}${arr[2]}.jpg" class="pic4">`
+
+    if (arr[0] == 0 && arr[1] == 0) {
+        video.innerHTML = `<iframe src="${cURL[`${arr[2]}`]}"></iframe>`
+    } else if (arr[0] == 0) {
+        video.innerHTML = `<iframe src="${cURL[`${arr[1]}${arr[2]}`]}"></iframe>`
+    } else {
+        video.innerHTML = `<iframe src="${cURL[`${arr[0]}${arr[1]}${arr[2]}`]}"></iframe>`
+    };
 
     setTimeout("clear()", 750 );
 }
-
-
-
 function turnChannelDelay () {
     if (arr[0] !== undefined && arr[1] == undefined && arr[2] == undefined) {
 
-        document.getElementById('video').innerHTML = 
-        `<img src="img/${arr[0]}.jpg" class="pic1">`
+        video.innerHTML = `<iframe src="${cURL[`${arr[0]}`]}"></iframe>`
 
     } else if (arr[0] !== undefined && arr[1] !== undefined && arr[2] == undefined) {
 
-        document.getElementById('video').innerHTML = 
-        `<img src="img/${arr[0]}${arr[1]}.jpg" class="pic1">`
+        video.innerHTML = `<iframe src="${cURL[`${arr[0]}${arr[1]}`]}"></iframe>`
     }
 
     setTimeout("clear()", 750 );
 }
-
 function turnChannelNow () {
 
     if (arr[0] !== undefined && arr[1] !== undefined && arr[2] !== undefined) {
 
-        document.getElementById('video').innerHTML = 
-        `<img src="img/${arr[0]}${arr[1]}${arr[2]}.jpg" class="pic4">`
+        video.innerHTML = `<iframe src="${cURL[`${arr[0]}${arr[1]}${arr[2]}`]}"></iframe>`
 
     } else if (arr[0] !== undefined && arr[1] !== undefined && arr[2] == undefined) {
 
-        document.getElementById('video').innerHTML = 
-        `<img src="img/${arr[0]}${arr[1]}.jpg" class="pic1">`
+        video.innerHTML = `<iframe src="${cURL[`${arr[0]}${arr[1]}`]}"></iframe>`
+
     } else if (arr[0] !== undefined && arr[1] == undefined && arr[2] == undefined) {
 
-        document.getElementById('video').innerHTML = 
-        `<img src="img/${arr[0]}.jpg" class="pic1">`
+        video.innerHTML = `<iframe src="${cURL[`${arr[0]}`]}"></iframe>`
+
     }
 
     setTimeout("clear()", 750 );
 }
+
 
 function delay () { 
 
@@ -64,48 +80,48 @@ function delay () {
     }
 };
 
-let arr = [];
-
 $(document).keydown(function (event) {
     
     let num = event.keyCode;
 
     if (num == 49) {
-        arr.push(1);
+        arr.push('1');
     } else if (num == 50) {
-        arr.push(2);
+        arr.push('2');
     } else if (num == 51) {
-        arr.push(3);
+        arr.push('3');
     } else if (num == 52) {
-        arr.push(4);
+        arr.push('4');
     } else if (num == 53) {
-        arr.push(5);
+        arr.push('5');
     } else if (num == 54) {
-        arr.push(6);
+        arr.push('6');
     } else if (num == 55) {
-        arr.push(7);
+        arr.push('7');
     } else if (num == 56) {
-        arr.push(8);
+        arr.push('8');
     } else if (num == 57) {
-        arr.push(9);
+        arr.push('9');
     } else if (num == 48) {
-        arr.push(0);
+        arr.push('0');
     } else if (num == 13) {
         turnChannelNow();
+    } else {
+        arr = ['O' , 'r' , 'z'];
     }
 
     console.log(arr);
     
     // 控制頻道數字顯示
-    document.getElementById('hund-num').value = arr[0];
-    document.getElementById('tens-num').value = arr[1];
-    document.getElementById('units-num').value = arr[2];
+    hundNum.value = arr[0];
+    tensNum.value = arr[1];
+    unitsNum.value = arr[2];
 
     if (arr[1] == undefined && arr[2] == undefined) {
-        document.getElementById('tens-num').value = "_";
-        document.getElementById('units-num').value = "_";
+        tensNum.value = "_";
+        unitsNum.value = "_";
     } else if (arr[2] == undefined) {
-        document.getElementById('units-num').value = "_";
+        unitsNum.value = "_";
     }
 
     //控制頻道畫面顯示
@@ -113,13 +129,62 @@ $(document).keydown(function (event) {
         turnChannel();
     }
     setTimeout("delay()", 1000); 
-
 });
 
 
-// Enter = 13
-//setTimeOut, setInterVal, Delay
+axios
+    .get('https://api.giphy.com/v1/gifs/search?api_key=LGQIENgsIjHrErZUlZ4mz2D8xpwly9lm&q=cat&limit=50&offset=0&rating=pg&lang=en')
+    .then(res => {
+        // console.log('success' , res.data.data[0].embed_url);
+        res.data.data.forEach( function (cat) {
+            cURL.push(cat.embed_url)
+        });
+    })
+    .catch( err => {
+        console.log('error' , err);
+    });
 
+axios
+    .get('https://api.giphy.com/v1/gifs/search?api_key=LGQIENgsIjHrErZUlZ4mz2D8xpwly9lm&q=cartoon&limit=50&offset=0&rating=pg&lang=en')
+    .then(res => {
+        // console.log('success' , res.data.data[0].embed_url);
+        res.data.data.forEach( function (cartoon) {
+            cURL.push(cartoon.embed_url);
+        });
+    })
+    .catch( err => {
+        console.log('error' , err);
+    });
+
+axios
+    .get('https://api.giphy.com/v1/gifs/search?api_key=LGQIENgsIjHrErZUlZ4mz2D8xpwly9lm&q=hell&limit=49&offset=0&rating=pg&lang=en')
+    .then(res => {
+        // console.log('success' , res.data.data[0].embed_url);
+        res.data.data.forEach( function (cartoon) {
+            cURL.push(cartoon.embed_url);
+        });
+    })
+    .catch( err => {
+        console.log('error' , err);
+    });
+
+    console.log('cURL' , cURL);
+
+
+
+
+
+
+
+
+
+
+
+
+    
+
+
+// ------------------------------------------------------------
 
 
 // !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
@@ -128,6 +193,140 @@ $(document).keydown(function (event) {
 // 點數字以外的會出現錯誤
 // !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 // !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+
+
+// let arr = [];
+
+// function clear () {
+
+//     arr = [];
+//     hundNum.value = "";
+//     tensNum.value = "";
+//     unitsNum.value = "";
+// }
+
+
+// function turnChannel () {
+    
+//     video.innerHTML = 
+//     `<img src="img/${arr[0]}${arr[1]}${arr[2]}.jpg" class="pic4">`
+
+//     setTimeout("clear()", 750 );
+// }
+// function turnChannelDelay () {
+//     if (arr[0] !== undefined && arr[1] == undefined && arr[2] == undefined) {
+
+//         video.innerHTML = 
+//         `<img src="img/${arr[0]}.jpg" class="pic1">`
+
+//     } else if (arr[0] !== undefined && arr[1] !== undefined && arr[2] == undefined) {
+
+//         video.innerHTML = 
+//         `<img src="img/${arr[0]}${arr[1]}.jpg" class="pic1">`
+//     }
+
+//     setTimeout("clear()", 750 );
+// }
+// function turnChannelNow () {
+
+//     if (arr[0] !== undefined && arr[1] !== undefined && arr[2] !== undefined) {
+
+//         video.innerHTML = 
+//         `<img src="img/${arr[0]}${arr[1]}${arr[2]}.jpg" class="pic4">`
+
+//     } else if (arr[0] !== undefined && arr[1] !== undefined && arr[2] == undefined) {
+
+//         video.innerHTML = 
+//         `<img src="img/${arr[0]}${arr[1]}.jpg" class="pic1">`
+//     } else if (arr[0] !== undefined && arr[1] == undefined && arr[2] == undefined) {
+
+//         video.innerHTML = 
+//         `<img src="img/${arr[0]}.jpg" class="pic1">`
+//     }
+
+//     setTimeout("clear()", 750 );
+// }
+
+
+// function delay () { 
+
+//     if (arr[0] !== undefined && arr[1] == undefined) {
+//         turnChannelDelay();
+//     } else if (arr[0] !== undefined && arr[1] !== undefined && arr[2] == undefined) {
+//         turnChannelDelay();
+//     }
+// };
+
+
+// $(document).keydown(function (event) {
+    
+//     let num = event.keyCode;
+
+//     if (num == 49) {
+//         arr.push(1);
+//     } else if (num == 50) {
+//         arr.push(2);
+//     } else if (num == 51) {
+//         arr.push(3);
+//     } else if (num == 52) {
+//         arr.push(4);
+//     } else if (num == 53) {
+//         arr.push(5);
+//     } else if (num == 54) {
+//         arr.push(6);
+//     } else if (num == 55) {
+//         arr.push(7);
+//     } else if (num == 56) {
+//         arr.push(8);
+//     } else if (num == 57) {
+//         arr.push(9);
+//     } else if (num == 48) {
+//         arr.push(0);
+//     } else if (num == 13) {
+//         turnChannelNow();
+//     }
+
+//     console.log(arr);
+    
+//     // 控制頻道數字顯示
+//     hundNum.value = arr[0];
+//     tensNum.value = arr[1];
+//     unitsNum.value = arr[2];
+
+//     if (arr[1] == undefined && arr[2] == undefined) {
+//         tensNum.value = "_";
+//         unitsNum.value = "_";
+//     } else if (arr[2] == undefined) {
+//         unitsNum.value = "_";
+//     }
+
+//     //控制頻道畫面顯示
+//     if (arr[0] !== undefined && arr[1] !== undefined && arr[2] !== undefined) {
+//         turnChannel();
+//     }
+//     setTimeout("delay()", 1000); 
+
+// });
+
+
+
+
+
+// axios
+//     .get('https://api.giphy.com/v1/gifs/search?api_key=LGQIENgsIjHrErZUlZ4mz2D8xpwly9lm&q=cat&limit=25&offset=0&rating=g&lang=en')
+//     .then(res => {
+//         console.log('success' , res);
+//         let cat1 = res.data.data[0].embed_url;
+
+//         document.getElementById('cat').innerHTML =
+//         `<iframe src="${res.data.data[0].embed_url}"></iframe>`
+//     })
+//     .catch( err => {
+//         console.log('error' , err);
+//     });
+
+// ------------------------------------------------------------
+
 
 
 

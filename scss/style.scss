@@ -2,21 +2,35 @@
 body {
     position: relative;
 
+    #greeting {
+        position: absolute;
+        top: 10%;
+        left: 10%;
+        color: #FFF;
+        font-family: 'Orbitron', sans-serif;
+        letter-spacing: 4px;
+        
+        p {
+            font-size: 2vw;
+        }
+    }
+
+    #descripe {
+        position: absolute;
+        bottom: 20%;
+        right: 5%;
+        color: #FFF;
+        font-family: 'Orbitron', sans-serif;
+        letter-spacing: 4px;
+        
+        p {
+            font-size: 1vw;
+        }
+    }
+
     #tv {
         .main-pic {
             width: 100%;
-            // z-index: 2;
-        }
-    
-        #video {
-            img {
-                position: absolute;
-                top: 190px;
-                left: 225px;
-                z-index: -1;
-                width: 250px;
-                // display: none;
-            }
         }
     }
     
@@ -24,18 +38,13 @@ body {
         width: 26%;
         height: 37%;
         position: absolute;
-        top: 40%;
+        top: 39%;
         left: 31%;
-
-        // background: chocolate;
-        // opacity: .5;
 
         #num {
             display: flex;
             justify-content: flex-end;
 
-            // background: chocolate;
-            // opacity: .5;
             padding-right: 12%;
             padding-top: 5%;
 
@@ -43,24 +52,21 @@ body {
             // animation-duration: 1s;
             // animation-iteration-count: infinite;
         
-            @keyframes dot {
-                0%{
-                    opacity: 0;
-                }
-                7%{
-                    opacity:1;
-                }
-                100%{
-                    opacity: 1;
-                }
-            }
+            // @keyframes dot {
+            //     0%{
+            //         opacity: 0;
+            //     }
+            //     7%{
+            //         opacity:1;
+            //     }
+            //     100%{
+            //         opacity: 1;
+            //     }
+            // }
 
             .num {
                 border: none;
                 background: none;
-        
-                // background: chocolate;
-                // opacity: .5;
         
                 width: 12%;
                 height: 25%;
@@ -71,22 +77,23 @@ body {
                 font-weight: 700;
                 font-size: 3vw;
             }
-
-            // #tens-num {
-            // }
-            // #units-num {
-            // }
         }
 
         #video {
             position: absolute;
             top: 0;
             height: 100%;
+            width: 100%;
             z-index: -2;
 
-            img {
-                // opacity: .5;
-                height: 100%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+
+            iframe {
+                width: 250%;
+                height: 220%;
+                border: none;
             }
         }
 
@@ -97,7 +104,6 @@ body {
             z-index: -3;
 
             img {
-                // opacity: .5;
                 height: 100%;
             }
         }

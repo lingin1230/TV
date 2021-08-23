@@ -2,23 +2,41 @@ body {
   position: relative;
 }
 
-body #tv .main-pic {
-  width: 100%;
+body #greeting {
+  position: absolute;
+  top: 10%;
+  left: 10%;
+  color: #FFF;
+  font-family: 'Orbitron', sans-serif;
+  letter-spacing: 4px;
 }
 
-body #tv #video img {
+body #greeting p {
+  font-size: 2vw;
+}
+
+body #descripe {
   position: absolute;
-  top: 190px;
-  left: 225px;
-  z-index: -1;
-  width: 250px;
+  bottom: 20%;
+  right: 5%;
+  color: #FFF;
+  font-family: 'Orbitron', sans-serif;
+  letter-spacing: 4px;
+}
+
+body #descripe p {
+  font-size: 1vw;
+}
+
+body #tv .main-pic {
+  width: 100%;
 }
 
 body #cha {
   width: 26%;
   height: 37%;
   position: absolute;
-  top: 40%;
+  top: 39%;
   left: 31%;
 }
 
@@ -31,30 +49,6 @@ body #cha #num {
           justify-content: flex-end;
   padding-right: 12%;
   padding-top: 5%;
-}
-
-@-webkit-keyframes dot {
-  0% {
-    opacity: 0;
-  }
-  7% {
-    opacity: 1;
-  }
-  100% {
-    opacity: 1;
-  }
-}
-
-@keyframes dot {
-  0% {
-    opacity: 0;
-  }
-  7% {
-    opacity: 1;
-  }
-  100% {
-    opacity: 1;
-  }
 }
 
 body #cha #num .num {
@@ -73,11 +67,23 @@ body #cha #video {
   position: absolute;
   top: 0;
   height: 100%;
+  width: 100%;
   z-index: -2;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
 }
 
-body #cha #video img {
-  height: 100%;
+body #cha #video iframe {
+  width: 250%;
+  height: 220%;
+  border: none;
 }
 
 body #cha #default {
