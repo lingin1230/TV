@@ -10,7 +10,7 @@ let arr = [];
 let cURL = ['' , ''];
 
 
-
+// 轉台後重置
 function clear () {
 
     arr = [];
@@ -19,6 +19,7 @@ function clear () {
     unitsNum.value = "";
 }
 
+// 完整輸入三位數轉台
 function turnChannel () {
 
     if (arr[0] == 0 && arr[1] == 0) {
@@ -33,6 +34,7 @@ function turnChannel () {
 
     setTimeout("clear()", 750 );
 }
+// 只輸入一、二碼轉台
 function turnChannelDelay () {
     if (arr[0] !== undefined && arr[1] == undefined && arr[2] == undefined) {
 
@@ -46,6 +48,7 @@ function turnChannelDelay () {
     bg.classList.add('bg');
     setTimeout("clear()", 750 );
 }
+// 按下 Enter 立刻轉台
 function turnChannelNow () {
 
     if (arr[0] !== undefined && arr[1] !== undefined && arr[2] !== undefined) {
@@ -66,7 +69,7 @@ function turnChannelNow () {
     setTimeout("clear()", 750 );
 }
 
-
+// 輸入一、二碼情況下延遲
 function delay () { 
 
     if (arr[0] !== undefined && arr[1] == undefined) {
@@ -76,6 +79,7 @@ function delay () {
     }
 };
 
+// 按下數字鍵
 $(document).keydown(function (event) {
     
     let num = event.keyCode;
